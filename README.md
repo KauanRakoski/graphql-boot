@@ -11,22 +11,34 @@
 To start, use the commands:
 
 ```bash
-    cd graphql-server
-    npm install
-    npm run dev
+cd graphql-server
+npm install
+npm run dev
 ```
 
-It should launch a server at http://localhost:4000, where a GraphQL playground will be available.
+It should launch a server at **_localhost:4000_**, where a GraphQL playground will be available. _User fields, such as id, name and email (excluding age) are non-nullable, which means every query should contain those_. It uses a JavaScript JSON-based database, for test purposes. Changes won't be persistent.
 
 ### 🔗 API methods
 
-**Query**
+**Query (retrieve data):**
 
-- users: returns data of all users.
-- user(id: ID!): returns an user by ID.
+```graphql
+# Returns an array with all users
+users: [User!]!
 
-**Mutation**
+# Finds an user by ID and returns data about the user.
+user(id: ID!): User!
+```
 
-- createUser(id: ID!, name: String!, email: String!, age: Int): creates user and returns data about it.
-- updateUser(id: ID!, name: String, email: String, age: Int): finds an user by ID and updates it.
-- deleteUser(id: ID!): finds an user by ID and deletes it.
+**Mutation (update data):**
+
+```graphql
+# Creates an user and returns data about it.
+createUser(id: ID!, name: String!, email: String!, age: Int): User!
+
+# Finds an user by ID and updates it.
+updateUser(id: ID!, name: String, email: String, age: Int): User!
+
+# Finds an user by ID and deletes it.
+deleteUser(id: ID!): User!
+```
